@@ -1,5 +1,6 @@
 package com.example.holybibleclean.core
 
+import com.example.holybibleclean.data.BookCloudMapper
 import junit.framework.Assert.assertTrue
 import org.junit.Test
 import java.io.IOException
@@ -24,17 +25,17 @@ class AbstractTest {
     }
 
     private sealed class TestDataObject : Abstract.Object<DomainObject, DataMapper>() {
-        abstract override fun map(mapper: DataMapper): DomainObject
+        abstract override fun map(mapper: BookCloudMapper): DomainObject
 
         class Succes(private val text1: String, private val text2: String) : TestDataObject() {
-            override fun map(mapper: DataMapper): DomainObject {
+            override fun map(mapper: BookCloudMapper): DomainObject {
                 return mapper.map(text1, text2)
             }
 
         }
 
         class Fail(private val exception: Exception) : TestDataObject() {
-            override fun map(mapper: DataMapper): DomainObject {
+            override fun map(mapper: BookCloudMapper): DomainObject {
                 return mapper.map(exception)
             }
 
@@ -58,14 +59,14 @@ class AbstractTest {
 
     private sealed class DomainObject : Abstract.Object<UiObj, DomainToUiObj>() {
         class Succes(private val textCombine: String) : DomainObject() {
-            override fun map(mapper: DomainToUiObj): UiObj {
+            override fun map(mapper: BookCloudMapper): UiObj {
                 TODO("Not yet implemented")
             }
 
         }
 
         class Fail : DomainObject() {
-            override fun map(mapper: DomainToUiObj): UiObj {
+            override fun map(mapper: BookCloudMapper): UiObj {
                 TODO("Not yet implemented")
             }
         }
